@@ -42,16 +42,21 @@ const Onboarding = () => {
     setInterval(() => {
       setDate(dayjs);
     }, 1000);
-
-    (async () => {
-      fetch(`${API_URL}lat=${lat}&lon=${long}&APPID=${API_KEY}&units=imperial`)
-        .then((res) => res.json())
-        .then((data) => {
-          setTemperature(data.main.temp_max);
-        })
-        .catch((err) => console.log(err.message));
-    })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          `${API_URL}lat=${lat}&lon=${long}&APPID=${API_KEY}&units=imperial`
+        );
+        const data = response.data;
+        setTemperature(data.main.temp);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [lat, long]);
 
   return (
     <View style={styles.container}>

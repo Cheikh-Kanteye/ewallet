@@ -35,7 +35,7 @@ const Data = [
 type SignInProps = StackNavigationProp<StackParamList, "SignIn">;
 
 const SignIn = () => {
-  const naviagtion = useNavigation<SignInProps>();
+  const navigation = useNavigation<SignInProps>();
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -50,10 +50,10 @@ const SignIn = () => {
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.h1}>Welcome back</Text>
-          <Input placeholder="Email/Phone Number" icon={0} />
+          <Input placeholder="Email/Phone Number" icon={"mail"} />
           <Input
             placeholder="Password"
-            icon={0}
+            icon={"lock"}
             //   textInput={{ style: { marginBottom: 20 } }}
           />
           <View
@@ -72,7 +72,7 @@ const SignIn = () => {
               />
             </View>
             <Button
-              label="forgot password"
+              label="forgot password?"
               icon={0}
               onPress={() => console.log("sign up")}
             />
@@ -81,18 +81,13 @@ const SignIn = () => {
       </KeyboardAvoidingView>
       <View style={[styles.contentContainer, { flex: 1.5 }]}>
         <Button
-          label="Sign up"
+          label="Sign in"
           icon={0}
           isPrimary
-          onPress={() => naviagtion.navigate("Main" as never)}
+          onPress={() => navigation.navigate("Main" as never)}
           cstyle={{ width: "100%", height: 45, borderRadius: 10 }}
         />
-        <Button
-          label="Or login with"
-          icon={0}
-          onPress={() => console.log("sign up")}
-          cstyle={{ width: "100%", height: 45, borderRadius: 10 }}
-        />
+        <Text style={styles.text}>Or continue with</Text>
         <View
           style={{
             ...styles.row,
@@ -116,7 +111,10 @@ const SignIn = () => {
             );
           })}
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginVertical: 8 }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SignUp")}
+          style={{ alignSelf: "center", marginVertical: 8 }}
+        >
           <Text>
             Don't have an account?
             <Text style={{ fontWeight: "bold", color: "#3A4276" }}>
@@ -164,5 +162,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#3A4276",
     margin: 5,
+  },
+  text: {
+    fontSize: 18,
+    marginEnd: 5,
+    textAlign: "center",
+    paddingVertical: 14,
   },
 });

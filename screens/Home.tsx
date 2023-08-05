@@ -16,47 +16,18 @@ import {
   useDrawerProgress,
 } from "@react-navigation/drawer";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { CategorieTitle, Header, RoundedBtn } from "../components";
+import { CategorieTitle, Header, RoundedBtn, ScaledView } from "../components";
 import images from "../assets";
 import { width, CONTACTS, SERVICES } from "../config";
 import { DrawerParamList } from "../App";
-import Animated, {
-  Extrapolate,
-  useAnimatedStyle,
-} from "react-native-reanimated";
 
 interface HomeProps {
   navigation: DrawerNavigationProp<DrawerParamList, "Home">;
 }
 
 const Home = ({ navigation }: HomeProps) => {
-  const progress = useDrawerProgress();
-  //@ts-ignore
-  const scale = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [1, 0.75],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  //@ts-ignore
-  const borderRadius = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [0, 30],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  //@ts-ignore
-  const rotate = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: ["0deg", "-10deg"],
-    extrapolate: Extrapolate.CLAMP,
-  });
-  const animatedStyle = {
-    transform: [{ scale }, { rotateZ: rotate }],
-    borderRadius,
-  };
-
   return (
-    //@ts-ignore
-    <Animated.View style={[styles.container, animatedStyle]}>
+    <ScaledView>
       <Header
         openDrawer={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
@@ -158,19 +129,13 @@ const Home = ({ navigation }: HomeProps) => {
           />
         </View>
       </View>
-    </Animated.View>
+    </ScaledView>
   );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-    backgroundColor: "#fff",
-    paddingTop: StatusBar.currentHeight,
-  },
   balanceCard: {
     width: width - 32,
     height: 115,

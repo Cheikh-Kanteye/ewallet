@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   setBackgroundColorAsync,
   setPositionAsync,
@@ -10,11 +10,8 @@ import {
   NavigationContainer,
   NavigatorScreenParams,
 } from "@react-navigation/native";
-import {
-  createDrawerNavigator,
-  useDrawerProgress,
-} from "@react-navigation/drawer";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Feather } from "@expo/vector-icons";
 import {
   Accounts,
   Help,
@@ -28,7 +25,8 @@ import {
   Transactions,
 } from "./screens";
 import { DrawerContent } from "./components";
-import Animated from "react-native-reanimated";
+import { StatusBar } from "expo-status-bar";
+import { TouchableOpacity } from "react-native";
 
 export type DrawerParamList = {
   Home: undefined;
@@ -70,7 +68,6 @@ const DrawerNavigator = () => {
       drawerContent={(props) => {
         return <DrawerContent {...props} />;
       }}
-      useLegacyImplementation
     >
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
@@ -86,12 +83,13 @@ const DrawerNavigator = () => {
 export default function App() {
   useEffect(() => {
     setPositionAsync("absolute");
-    setBackgroundColorAsync("rgba(255, 255, 255, .1)");
+    setBackgroundColorAsync("rgba(255, 255, 255, 0.01)");
     setButtonStyleAsync("dark");
   }, []);
 
   return (
     <NavigationContainer>
+      <StatusBar style="dark" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="SignIn" component={SignIn} />

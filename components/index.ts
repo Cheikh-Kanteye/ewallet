@@ -5,3 +5,4 @@ export { default as Input } from "./Input";
 export { default as AnimatedView } from "./AnimatedView";
 export { default as DrawerContent } from "./DrawerContent";
 export { default as CategorieTitle } from "./CategorieTitle";
+export { default as ScaledView } from "./ScaledView";

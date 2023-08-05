@@ -23,6 +23,7 @@ const images = {
   facebook: require("./facebook.png"),
   google: require("./google.png"),
   apple: require("./apple.png"),
+  userProfile: require("./userprofile.jpg"),
 };
 
 export default images;
